@@ -94,8 +94,7 @@ function descriptionFilter($s, $req, $app)
         $scheme = $req->getUri()->getScheme();
         $base = $req->getUri()->getHost();
         $path = $m[1];
-        $file = basename($path);
-        return "<a href='$scheme://$base$path'>$file</a>";
+        return "<a href='$scheme://$base$path'>$scheme://$base$path</a>";
     }, $s);
     return $s;
 }
