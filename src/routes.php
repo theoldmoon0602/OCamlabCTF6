@@ -76,7 +76,7 @@ function getChallenges($db, $open_only)
     $cond = $open_only ? ' where is_open = true' : '';
     $challenges = $db->query('select ' .
         'challenges.id as id, challenges.name as name, description, flag, point, is_open, categories.name as category, ' .
-        '(select count(*) from submissions where is_correct = true and p_id = challenges.id) as solved ' .
+        '(select count(*) from submissions where is_correct = 1 and p_id = challenges.id) as solved ' .
         'from challenges inner join categories on challenges.c_id = categories.id ' . $cond)->fetchAll();
 
     return $challenges;
