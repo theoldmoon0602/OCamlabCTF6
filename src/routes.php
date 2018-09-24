@@ -366,8 +366,8 @@ $app->group('/admin', function () use ($app, $container) {
             $this->db->insert('categories', ['name' => $postParams['name']]);
         } catch (PDOException $e) {
             $this->flash->addMessage('errors', $e->getMessage());
-            return $response->withRedirect($this->router->pathFor('admin/categories'));
         }
+        return $response->withRedirect($this->router->pathFor('admin/categories'));
     });
 
     $app->get('/category/{id}', function (Request $request, Response $response, array $args) {
