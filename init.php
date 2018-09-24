@@ -7,6 +7,8 @@ $config = require_once('src/settings.php');
 unlink('database/database.db');
 mkdir('database');
 system('sqlite3 database/database.db < schema.sql');
+chmod('database', 0777);
+chmod('database/database.db', 0777);
 
 $db = new Medoo\Medoo($config['settings']['db']);
 $db->insert('competition', [
