@@ -90,6 +90,12 @@ function descriptionFilter($s, $req, $app)
         $file = basename($path);
         return "<a href='$base$path'>$file</a>";
     }, $s);
+    $s = preg_replace_callback('/{{host}}\((.+)\)/', function ($m) use ($req) {
+        $base = $req->getUri()->getHost();
+        $path = $m[1];
+        $file = basename($path);
+        return "<a href='$base$path'>$file</a>";
+    }, $s);
     return $s;
 }
 
