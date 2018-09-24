@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block content %}
+
+<h3>Register new user with new team</h3>
+<div class="centering">
+  <form method="post" action="{{ base_url() }}/register-team" class="form">
+    <p><label>team name</label> <br/> <input type="text" name="team" required placeholder="[A-Z][A-Za-z0-9_]{1,30}"></p>
+    <p><label>username</label><br/> <input type="text" name="username" required placeholder="[A-Z][A-Za-z0-9_]{1,30}"></p>
+    <p><label>password</label><br/> <input type="password" name="password" required></p>
+
+    <p><input type="submit" name="register" value="Register" /></p>
+  </form>
+</div>
+
+
+<h3>Register new user and join existing team</h3>
+<div class="centering">
+  <form method="post" action="{{ base_url() }}/register-user" class="form">
+    <p><label>team token</label><br/> <input type="text" name="team" required></p>
+    <p><label>username</label><br/> <input type="text" name="username" required placeholder="[A-Z][A-Za-z0-9_]{1,30}"></p>
+    <p><label>password</label> <br/><input type="password" name="password" required></p>
+
+    <p><input type="submit" name="register" value="Register" /></p>
+  </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block content %}
+
+<h2>{{ challenge.name }} </h2>
+
+<div class="centering">
+  <p class="challenge-description">{{ challenge.description | raw | nl2br }}</p>
+</div>
+
+<div class="centering">
+    <form action="{{ base_url() }}/submit/{{ challenge.id }}" method="post" class="form
+    {% if challenge.id in user.team.solved|array_column('id') %}
+    solved
+  {% endif %}">
+      <p>
+        flag
+        <input type="text" name="flag" required />
+      </p>
+      <p>
+        <input type="submit" value="submit">
+      </p>
+    </form>
+</div>
+
+
+{% endblock %}

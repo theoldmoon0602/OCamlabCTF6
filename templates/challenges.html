@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="challenges">
+{% for c in challenges %}
+<a href="{{ base_url() }}/challenge/{{ c.id}}" class="challenge
+  {% if c.id in user.team.solved|array_column('id') %}
+    solved
+  {% endif %}">
+  <p class="challenge-name">[{{ c.category }}]{{ c.name }}</p>
+  <p class="challenge-info">{{ c.point }}</p>
+</a>
+{% endfor %}
+</div>
+
+{% endblock %}

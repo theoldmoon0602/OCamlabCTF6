@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p class="centering">
+  <img src="assets/logo.png" class="top-logo" />
+</p>
+
+<p>
+  Competition is held from {{ ctf.start_at | date('Y-m-d H:i:s') }} to {{ ctf.end_at | date('Y-m-d H:i:s') }}
+</p>
+
+{% endblock %}

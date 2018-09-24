@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block content %} {% if team %}
+<h2>{{ team.name }}</h2>
+
+{% if user and team.id == user.team_id %}
+<p>Your team token is {{ team.token }}</p>
+{% endif %}
+
+
+<h3>Members</h3>
+<ul>
+    {% for m in team.members %}
+    <li>{{ m.name }}</li>
+    {% endfor %}
+</ul>
+
+<h3>Solved Problems</h3>
+{% if team.solved %}
+<ul>
+    {% for p in team.solved %}
+    <li><a href="{{base_url()}}/challenge/{{p.id}}">{{ p.name }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>This team did not solve any problem yet.</p>
+{% endif %} {% else %}
+<p>Team not found</p>
+{% endif %} {% endblock %}

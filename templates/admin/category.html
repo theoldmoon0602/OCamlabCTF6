@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="{{base_url() }}/admin/category/{{ category.id }}" method="post" class="form">
+        <p>
+            name <br>
+            <input type="text" name="name" value="{{ category.name }}" required>
+        </p>
+        <input type="submit" value="update">
+    </form>
+
+    <p><a href="{{ base_url()}}/admin/categories">back</a></p>
+
+    <form action="{{base_url() }}/admin/category/{{ category.id }}/delete" method="post">
+        <input type="submit" value="delete">
+    </form>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Ranking</h2>
+<table>
+  <tr>
+    <th>Rank</th>
+    <th>Team</th>
+    <th>Point</th>
+  </tr>
+  {% for i, t in teams %}
+  <tr>
+    <td>{{ i + 1 }}</td>
+    <td>{{ t.name }}</td>
+    <td>{{ t.point }}</td>
+  </tr>
+  {%endfor %}
+</table>
+
+<h2>Latest Solves</h2>
+<ul>
+  {% for s in submissions|reverse|slice(0, 10) %}
+
+    <li>{{ s.created_at | date('Y-m-d H:i:s') }}  {{s.team_name}} solved {{ s.challenge_name }} </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
+

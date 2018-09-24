@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="centering">
+  <form method="post" action="{{ base_url() }}/login" class="form">
+    <p><label>username</label><br/> <input type="text" name="username" required placeholder="[A-Z][A-Za-z0-9_]{1,30}"></p>
+    <p><label>password</label> <br/><input type="password" name="password" required></p>
+
+    <p><input type="submit" name="login" value="Login" /></p>
+  </form>
+</div>
+{% endblock %}

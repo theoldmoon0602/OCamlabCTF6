@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Categories</h2>
+    <form action="{{ base_url() }}/admin/categories" method="post" class="form">
+        <p>
+            name <br>
+            <input type="text" name="name" required>
+        </p>
+        <input type="submit" value="Add">
+    </form>
+
+    <ul>
+        {% for c in categories %}
+        <li><a href="{{ base_url() }}/admin/category/{{c.id}}">{{ c.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Challenges</h2>
+    <form action="{{ base_url() }}/admin/challenges" method="post" class="form">
+        <p>
+            name <br>
+            <input type="text" name="name" required>
+        </p>
+
+        <p>
+            description <br>
+            <textarea name="description" id="" required></textarea>
+        </p>
+
+        <p>
+            flag <br>
+            <input type="text" name="flag" required>
+        </p>
+
+        <p>
+            point <br>
+            <input type="number" name="point" value="0" required>
+        </p>
+
+        <p>
+            category <br>
+            <select name="category" id="">
+                {% for cate in categories %}
+                <option value="{{ cate.id }}">{{ cate.name }}</option>
+                {% endfor %}
+            </select>
+        </p>
+
+        <p>
+            is_open <br>
+            <input type="checkbox" name="is_open" >
+        </p>
+
+        <p>
+            <input type="submit" value="add challenge">
+        </p>
+
+    </form>
+
+    <ul>
+        {% for c in challenges %}
+        <li><a href="{{ base_url() }}/admin/challenge/{{c.id}}">{{ c.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
