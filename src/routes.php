@@ -13,7 +13,7 @@ function getSubmissions($db) {
     ], [
         'teams.name(team_name)', 'team_id', 'submissions.point(point)', 'created_at', 'challenges.name(challenge_name)'
     ], [
-        'is_correct' => true,
+        'is_correct' => 1,
         'submissions.point[!]' => 0,
         'ORDER' => 'created_at',
     ]);
@@ -31,7 +31,7 @@ function getTeam($db, $team_id)
     ]);
 
     $solved = $db->select('submissions', 'p_id', [
-        'is_correct' => true,
+        'is_correct' => 1,
         'u_id' => $db->select('users', 'id', [
             'team_id' => $team['id'],
         ]),
@@ -52,7 +52,7 @@ function getUser($db, $user_id)
     $user = $db->get('users', '*', ['id' => $user_id]);
     $team = getTeam($db, $user['team_id']);
     $solved = $db->select('submissions', '*', [
-        'is_correct' => true,
+        'is_correct' => 1,
         'u_id' => $user['id'],
     ]);
 
@@ -73,7 +73,7 @@ function getChallenge($db, $id)
 
 function getChallenges($db, $open_only)
 {
-    $cond = $open_only ? ' where is_open = true' : '';
+    $cond = $open_only ? ' where is_open = 1' : '';
     $challenges = $db->query('select ' .
         'challenges.id as id, challenges.name as name, description, flag, point, is_open, categories.name as category, ' .
         '(select count(*) from submissions where is_correct = 1 and p_id = challenges.id) as solved ' .
@@ -310,10 +310,10 @@ $app->post('/submit/{id}', function (Request $request, Response $response, array
         return $response->withRedirect($this->router->pathFor('challenges'));
     }
 
-    $is_correct = false;
+    $is_correct = 0;
     $point = 0;
     if ($challenge['flag'] === trim($flag)) {
-        $is_correct = true;
+        $is_correct = 1;
         $team_solved = array_column($user['team']['solved'], 'id');
         if (array_search($challenge['id'], $team_solved) === false) {
             $point = $challenge['point'];
@@ -432,7 +432,7 @@ $app->group('/admin', function () use ($app, $container) {
                 'flag' => $postParams['flag'],
                 'point' => $postParams['point'],
                 'c_id' => $postParams['category'],
-                'is_open' => isset($postParams['is_open']),
+                'is_open' => isset($postParams['is_open']) ? 1 : 0,
             ]);
         } catch (PDOException $e) {
             $this->flash->addMessage('errors', $e->getMessage());
@@ -478,7 +478,7 @@ $app->group('/admin', function () use ($app, $container) {
                 'flag' => $postParams['flag'],
                 'point' => $postParams['point'],
                 'c_id' => $postParams['category'],
-                'is_open' => isset($postParams['is_open']),
+                'is_open' => isset($postParams['is_open']) ? 1 : 0,
             ], ['id' => $args['id']]);
         } catch (PDOException $e) {
             $this->flash->addMessage('errors', $e->getMessage());
