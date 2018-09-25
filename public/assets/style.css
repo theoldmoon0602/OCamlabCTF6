@@ -149,6 +149,7 @@ th {
     color: #393e46;
     box-shadow: 0 1px 5px #393e46;
     margin: 20px;
+    width: 250px;
 }
 
 .challenge.solved {
