@@ -136,7 +136,8 @@ th {
 .challenges {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .challenge {
@@ -147,6 +148,7 @@ th {
     text-decoration: none;
     color: #393e46;
     box-shadow: 0 1px 5px #393e46;
+    margin: 20px;
 }
 
 .challenge.solved {
